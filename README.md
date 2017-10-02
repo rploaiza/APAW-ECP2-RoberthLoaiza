@@ -5,9 +5,9 @@
 
 ### Estado del código
 
-[![Build Status](https://travis-ci.org/miw-upm/APAW-api-themes.svg?branch=develop)](https://travis-ci.org/miw-upm/APAW-api-themes)
+[![Build Status](https://travis-ci.org/rploaiza/APAW-ECP2-RoberthLoaiza.svg?branch=develop)](https://travis-ci.org/rploaiza/APAW-ECP2-RoberthLoaiza)
 
-[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=es.upm.miw:APAW-api-themes)](https://sonarcloud.io/dashboard/index/es.upm.miw:APAW-api-themes)
+[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=es.upm.miw:APAW-ECP2-RoberthLoaiza)](https://sonarcloud.io/dashboard/index/es.upm.miw:APAW-ECP2-RoberthLoaiza)
 
 ### Tecnologías necesarias
 * Java
@@ -16,11 +16,6 @@
 * GitHub
 * Travis-ci
 * Sonarcloud
-
-### Importar el proyecto mediante Eclipse
-1. Clonar mediante Eclipse este repositorio en la máquina local: https://youtu.be/rQNixJQQ25g
-1. Importar el repositorio clonado: https://youtu.be/yYvD8ZJtWwI
-1. Crear en Eclipse las ramas locales asociadas a las remotas
 
 ## Análisis
 En la figura siguiente tenemos un diagrama de los diferentes paquetes y sus dependencias que intervienen el la arquitectura. Se ha simplificado para realizar una primera aproximación. Como se ha realizado una simulación, se ha incluido el paquete `http` para todas aquellas clases que intervienen en las peticiones HTTP.  
@@ -57,4 +52,7 @@ Todas las peticiones llegan al `Dispatcher`, basándose en el patrón `Front-Con
 
 El `Dispatcher` delega en los diferentes recursos, cuya dependencia a HTTP se elimina, salvo ciertas excepciones. Su relación con HTTP se reduce a parámetros de las anotaciones de las clases. Los clases de recursos tienen dependencias con los controladores, pudiendo ser varios para poder delegar las diferentes peticiones.
 
-###### Autor: Jesús Bernal Bermúdez U.P.M.
+*** 
+
+La entidad con la que se trabajara sera de empleados y departamentos.
+![api-architecture-simulation-design](https://github.com/miw-upm/APAW-api-themes/blob/develop/docs/ECP-departament-employee.png)
