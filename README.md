@@ -55,4 +55,5 @@ El `Dispatcher` delega en los diferentes recursos, cuya dependencia a HTTP se el
 *** 
 
 La entidad con la que se trabajara sera de empleados y departamentos.
-![api-architecture-simulation-design](https://github.com/miw-upm/APAW-api-themes/blob/develop/docs/ECP-departament-employee.png)
+
+![entidad](https://github.com/rploaiza/APAW-ECP2-RoberthLoaiza/blob/master/docs/ECP-departament-employee.png)
