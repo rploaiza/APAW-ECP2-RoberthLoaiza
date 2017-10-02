@@ -8,7 +8,7 @@ branches:
 notifications:
   email:
     recipients:
-    - j.bernal@upm.es
+    - rp.loaiza@alumnos.upm.es
 script:
 # Calidad codigo: Sonarcloud
 - mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify --settings settings.xml
