@@ -1,6 +1,7 @@
 package api;
 
 import api.resources.DepartmentResource;
+import api.resources.exceptions.DepartmentFieldInvalidException;
 import api.resources.exceptions.RequestInvalidException;
 import http.HttpRequest;
 import http.HttpResponse;
@@ -22,10 +23,14 @@ public class Dispatcher {
 	public void doPost(HttpRequest request, HttpResponse response) {
 		try {
 			if (request.isEqualsPath(DepartmentResource.DEPARTMENT)) {
-				String departmentTitle = request.getBody().split(":")[0];
-				String departmentCenter = request.getBody().split(":")[1];
-				departmentResource.createDepartment(departmentTitle, departmentCenter);
-				response.setStatus(HttpStatus.CREATED);
+				if ((request.getBody() == null) || (request.getBody().split(":").length < 2)) {
+					throw new DepartmentFieldInvalidException();
+				} else {
+					String departmentTitle = request.getBody().split(":")[0];
+					String departmentCenter = request.getBody().split(":")[1];
+					departmentResource.createDepartment(departmentTitle, departmentCenter);
+					response.setStatus(HttpStatus.CREATED);
+				}
 			} else {
 				throw new RequestInvalidException(request.getPath());
 			}

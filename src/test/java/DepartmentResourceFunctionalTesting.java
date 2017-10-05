@@ -21,9 +21,17 @@ public class DepartmentResourceFunctionalTesting {
 	}
 
 	@Test(expected = HttpException.class)
-	public void testCreateDepartmentTitleEmpty() {
+	public void testCreateDepartmentEmpty() {
+		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(DepartmentResource.DEPARTMENT)
+				.body("").build();
+		new HttpClientService().httpRequest(request);
+	}
+
+	@Test(expected = HttpException.class)
+	public void testCreateDepartmentBody() {
 		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(DepartmentResource.DEPARTMENT)
 				.build();
 		new HttpClientService().httpRequest(request);
 	}
+
 }
