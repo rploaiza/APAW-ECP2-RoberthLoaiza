@@ -17,7 +17,13 @@ public class Dispatcher {
 	}
 
 	public void doGet(HttpRequest request, HttpResponse response) {
-		responseError(response, new RequestInvalidException(request.getPath()));
+		try {
+			if(request.isEqualsPath(DepartmentResource.DEPARTMENT + DepartmentResource.ID)) {
+				 response.setBody(departmentResource.readDepartment(Long.valueOf(request.paths()[1])).toString());	
+			}
+		} catch (Exception e) {
+			responseError(response, e);
+		}
 	}
 
 	public void doPost(HttpRequest request, HttpResponse response) {
