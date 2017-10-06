@@ -1,3 +1,5 @@
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -40,5 +42,21 @@ public class EmployeeResourceFunctionalTesting {
 		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(EmployeeResource.EMPLOYEES)
 				.build();
 		new HttpClientService().httpRequest(request);
+	}
+	
+	@Test
+	public void testReadEmployee() {
+		this.createEmployee();
+		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(EmployeeResource.EMPLOYEES)
+				.path(EmployeeResource.ID).expandPath("1").build();
+		assertEquals("{\"id\":1,\"surname\":\"Loaiza,\"active\":\"true\"}",new HttpClientService().httpRequest(request).getBody());
+	}
+	
+	@Test(expected = HttpException.class)
+	public void testReadDepartmentNull() {
+		this.createEmployee();
+		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(EmployeeResource.EMPLOYEES)
+				.path(EmployeeResource.ID).expandPath("2").build();
+		assertEquals("{\"id\":1,\"surname\":\"Loaiza,\"active\":\"true\"}",new HttpClientService().httpRequest(request).getBody());
 	}
 }
