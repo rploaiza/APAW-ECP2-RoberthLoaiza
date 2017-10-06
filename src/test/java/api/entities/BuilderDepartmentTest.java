@@ -22,6 +22,8 @@ public class BuilderDepartmentTest {
 	public void testBuilderDepartmentTitle() {
 		Department department = new BuilderDepartment("TICs", "Departamento de las TICs").build();
 		assertEquals("TICs", department.getTitle());
+		department.setTitle("UPSI");
+		assertEquals("UPSI", department.getTitle());
 	}
 
 	@Test
@@ -62,5 +64,12 @@ public class BuilderDepartmentTest {
 		assertNotNull(department.getEmployee());
 		assertEquals(1, department.getEmployee().size());
 	}
-
+	
+	@Test
+	public void testBuilderDepartmentCenter() {
+		Department department = new BuilderDepartment("TICs", "Departamento de las TICs").build();
+		assertEquals("Departamento de las TICs", department.getCenter());
+		department.setCenter("Departamento de datos");
+		assertEquals("Departamento de datos", department.getCenter());
+	}
 }

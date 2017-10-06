@@ -50,9 +50,4 @@ public class Employee {
 		this.active = active;
 	}
 
-	@Override
-	public String toString() {
-		return "Order [id=" + id + ", surname=" + surname + ", entry=" + entry + ", active=" + active + "]";
-	}
-
 }
