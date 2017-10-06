@@ -20,16 +20,6 @@ public class DepartmentControllerIT {
 	}
 
 	@Test
-	public void testReadDepartment() {
-		assertEquals("TICs", departmentController.readDepartment(1L).get().getTitle());
-	}
-
-	@Test
-	public void testReadDepartmentCenter() {
-		assertEquals("Informatica", departmentController.readDepartment(1L).get().getCenter());
-	}
-
-	@Test
 	public void testReadDepartmentNonExistId() {
 		assertFalse(departmentController.readDepartment(2L).isPresent());
 	}
