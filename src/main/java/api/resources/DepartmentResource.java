@@ -25,7 +25,7 @@ public class DepartmentResource {
 
 	private void validateField(String field, String field2) throws DepartmentFieldInvalidException {
 		if (field == null || field2 == null) {
-			throw new DepartmentFieldInvalidException("Error de" + field + "o de " + field2);
+			throw new DepartmentFieldInvalidException();
 		}
 	}
 }

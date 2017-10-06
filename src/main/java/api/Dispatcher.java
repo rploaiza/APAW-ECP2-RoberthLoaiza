@@ -3,6 +3,7 @@ package api;
 import api.resources.DepartmentResource;
 import api.resources.EmployeeResource;
 import api.resources.exceptions.DepartmentFieldInvalidException;
+import api.resources.exceptions.EmployeeFieldInvalidException;
 import api.resources.exceptions.RequestInvalidException;
 import http.HttpRequest;
 import http.HttpResponse;
@@ -42,6 +43,7 @@ public class Dispatcher {
 				}
 			} else if (request.isEqualsPath(EmployeeResource.EMPLOYEES)) {
 				if ((request.getBody() == null) || (request.getBody().split(":").length < 2)) {
+					throw new EmployeeFieldInvalidException();
 				} else {
 					String employeeSurname = request.getBody().split(":")[0];
 					boolean employeeActive = request.getBody().split(":")[1] != null;
