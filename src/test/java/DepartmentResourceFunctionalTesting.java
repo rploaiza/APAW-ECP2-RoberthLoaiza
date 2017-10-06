@@ -49,9 +49,7 @@ public class DepartmentResourceFunctionalTesting {
 		this.createDepartment();
 		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(DepartmentResource.DEPARTMENT)
 				.path(DepartmentResource.ID).expandPath("1").build();
-		assertEquals("{\"id\":1,\"title\":\"Database,\"center\":\"Informatica\"}",
-				new HttpClientService().httpRequest(request).getBody());
-
+		assertEquals("{\"id\":1,\"title\":\"Database,\"center\":\"Informatica\"}",new HttpClientService().httpRequest(request).getBody());
 	}
 	
 	@Test(expected = HttpException.class)
@@ -59,8 +57,6 @@ public class DepartmentResourceFunctionalTesting {
 		this.createDepartment();
 		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(DepartmentResource.DEPARTMENT)
 				.path(DepartmentResource.ID).expandPath("2").build();
-		assertEquals("{\"id\":1,\"title\":\"Database,\"center\":\"Informatica\"}",
-				new HttpClientService().httpRequest(request).getBody());
-
+		assertEquals("{\"id\":1,\"title\":\"Database,\"center\":\"Informatica\"}",new HttpClientService().httpRequest(request).getBody());
 	}
 }
