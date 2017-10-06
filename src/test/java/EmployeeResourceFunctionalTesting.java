@@ -59,4 +59,18 @@ public class EmployeeResourceFunctionalTesting {
 				.path(EmployeeResource.ID).expandPath("2").build();
 		assertEquals("{\"id\":1,\"surname\":\"Loaiza,\"active\":\"true\"}",new HttpClientService().httpRequest(request).getBody());
 	}
+	
+	@Test
+	public void testDeleteEmployee() {
+		this.createEmployee();
+		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.DELETE).path(EmployeeResource.EMPLOYEES).path("/{1}").build();
+		new HttpClientService().httpRequest(request);
+	}
+	
+	@Test
+	public void testDeleteEmployeeIdNull() {
+		this.createEmployee();
+		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.DELETE).path(EmployeeResource.EMPLOYEES).path("/{1}").build();
+		new HttpClientService().httpRequest(request);
+	}
 }

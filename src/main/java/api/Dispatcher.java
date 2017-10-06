@@ -12,7 +12,7 @@ import http.HttpStatus;
 public class Dispatcher {
 
 	private DepartmentResource departmentResource = new DepartmentResource();
-	
+
 	private EmployeeResource employeeResource = new EmployeeResource();
 
 	private void responseError(HttpResponse response, Exception e) {
@@ -24,7 +24,7 @@ public class Dispatcher {
 		try {
 			if (request.isEqualsPath(DepartmentResource.DEPARTMENT + DepartmentResource.ID)) {
 				response.setBody(departmentResource.readDepartment(Long.valueOf(request.paths()[1])).toString());
-			}else if(request.isEqualsPath(EmployeeResource.EMPLOYEES + EmployeeResource.ID)) {
+			} else if (request.isEqualsPath(EmployeeResource.EMPLOYEES + EmployeeResource.ID)) {
 				response.setBody(employeeResource.readEmployee(Long.valueOf(request.paths()[1])).toString());
 			}
 		} catch (Exception e) {
@@ -70,7 +70,18 @@ public class Dispatcher {
 	}
 
 	public void doDelete(HttpRequest request, HttpResponse response) {
-		responseError(response, new RequestInvalidException(request.getPath()));
+		try {
+			if (request.isEqualsPath(EmployeeResource.EMPLOYEES + EmployeeResource.ID)) {
+				if (request.paths()[1].equals(EmployeeResource.ID)) {
+					employeeResource.deleteEmployee(Long.valueOf(request.paths()[1]));
+				}
+			} else {
+				throw new RequestInvalidException(request.getPath());
+			}
+		} catch (Exception e) {
+			responseError(response, e);
+		}
+
 	}
 
 }
