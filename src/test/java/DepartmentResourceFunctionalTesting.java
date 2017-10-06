@@ -1,5 +1,10 @@
+import static org.junit.Assert.*;
+
+import org.junit.Before;
 import org.junit.Test;
 
+import api.daos.DaoFactory;
+import api.daos.memory.DaoMemoryFactory;
 import api.resources.DepartmentResource;
 import http.HttpClientService;
 import http.HttpException;
@@ -9,14 +14,19 @@ import http.HttpRequestBuilder;
 
 public class DepartmentResourceFunctionalTesting {
 
+	@Before
+	public void before() {
+		DaoFactory.setFactory(new DaoMemoryFactory());
+	}
+
 	private void createDepartment() {
 		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(DepartmentResource.DEPARTMENT)
-				.body("\"Database\":\"Informatica\"").build();
+				.body("Database:Informatica").build();
 		new HttpClientService().httpRequest(request);
 	}
 
 	@Test
-	public void testCreateTheme() {
+	public void testCreateDepartment() {
 		this.createDepartment();
 	}
 
@@ -34,4 +44,23 @@ public class DepartmentResourceFunctionalTesting {
 		new HttpClientService().httpRequest(request);
 	}
 
+	@Test
+	public void testReadDepartment() {
+		this.createDepartment();
+		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(DepartmentResource.DEPARTMENT)
+				.path(DepartmentResource.ID).expandPath("1").build();
+		assertEquals("{\"id\":1,\"title\":\"Database,\"center\":\"Informatica\"}",
+				new HttpClientService().httpRequest(request).getBody());
+
+	}
+	
+	@Test(expected = HttpException.class)
+	public void testReadDepartmentNull() {
+		this.createDepartment();
+		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(DepartmentResource.DEPARTMENT)
+				.path(DepartmentResource.ID).expandPath("2").build();
+		assertEquals("{\"id\":1,\"title\":\"Database,\"center\":\"Informatica\"}",
+				new HttpClientService().httpRequest(request).getBody());
+
+	}
 }
