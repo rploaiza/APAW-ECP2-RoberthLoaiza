@@ -21,13 +21,18 @@ public class DepartmentDaoMemoryTest {
 	}
 
 	@Test
-	public void testReadDepartment() {
+	public void testReadDepartmentTitle() {
 		assertEquals("TICs", DaoFactory.getFactory().getDepartmentDao().read(1L).getTitle());
 	}
 
 	@Test
 	public void testReadDepartmentCenter() {
 		assertEquals("Informatica", DaoFactory.getFactory().getDepartmentDao().read(1L).getCenter());
+	}
+	
+	@Test
+	public void testReadDepartmentId() {
+		assertEquals(1L, DaoFactory.getFactory().getDepartmentDao().read(1L).getId());
 	}
 
 	@Test

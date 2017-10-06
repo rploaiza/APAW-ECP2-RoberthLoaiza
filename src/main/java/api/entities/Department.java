@@ -13,7 +13,7 @@ public class Department {
 	private boolean strategic;
 
 	private List<Employee> employees;
-
+	
 	public Department(String title, String center) {
 		this.title = title;
 		this.center = center;
@@ -66,11 +66,4 @@ public class Department {
 			return employees.contains(employee);
 		}
 	}
-
-	@Override
-	public String toString() {
-		return "Department [id=" + id + ", title=" + title + ", center=" + center + ", strategic=" + strategic
-				+ ", employees=" + employees + "]";
-	}
-
 }

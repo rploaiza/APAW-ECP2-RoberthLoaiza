@@ -15,12 +15,29 @@ public class DepartmentDto {
 
 	public DepartmentDto(Department department) {
 		id = department.getId();
-		title = department.getTitle();
-		center = department.getCenter();
+		setTitle(department.getTitle());
+		setCenter(department.getCenter());
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getCenter() {
+		return center;
+	}
+
+	public void setCenter(String center) {
+		this.center = center;
 	}
 
 	@Override
 	public String toString() {
 		return "{\"id\":" + id + ",\"title\":\"" + title + ",\"center\":\"" + center + "\"}";
 	}
+
 }
