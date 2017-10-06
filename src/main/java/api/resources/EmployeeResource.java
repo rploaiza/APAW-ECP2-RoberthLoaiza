@@ -8,11 +8,11 @@ import api.resources.exceptions.EmployeeFieldInvalidException;
 import api.resources.exceptions.EmployeeIdNotFoundException;
 
 public class EmployeeResource {
-	
+
 	public static final String EMPLOYEES = "employees";
-	
-    public static final String ID = "/{id}";
-	
+
+	public static final String ID = "/{id}";
+
 	public void createEmployee(String surnameEmployee, boolean activeEmployee) throws EmployeeFieldInvalidException {
 		this.validateField(surnameEmployee, activeEmployee);
 		new EmployeeController().createEmployee(surnameEmployee, activeEmployee);
@@ -23,9 +23,13 @@ public class EmployeeResource {
 			throw new EmployeeFieldInvalidException();
 		}
 	}
-	
+
 	public EmployeeDto readEmployee(long employeeId) throws EmployeeIdNotFoundException {
 		Optional<EmployeeDto> optional = new EmployeeController().readEmployee(employeeId);
 		return optional.orElseThrow(() -> new EmployeeIdNotFoundException(Long.toString(employeeId)));
+	}
+
+	public void deleteEmployee(Long employeeId) {
+		new EmployeeController().deleteEmployee(employeeId);
 	}
 }

@@ -23,4 +23,8 @@ public class EmployeeController {
 			return Optional.empty();
 		}
 	}
+
+	public void deleteEmployee(long employeeId) {
+		DaoFactory.getFactory().getEmployeeDao().deleteById(employeeId);
+	}
 }

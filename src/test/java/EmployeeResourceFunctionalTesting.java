@@ -13,12 +13,12 @@ import http.HttpRequest;
 import http.HttpRequestBuilder;
 
 public class EmployeeResourceFunctionalTesting {
-	
+
 	@Before
 	public void before() {
 		DaoFactory.setFactory(new DaoMemoryFactory());
 	}
-	
+
 	private void createEmployee() {
 		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(EmployeeResource.EMPLOYEES)
 				.body("Loaiza:true").build();
@@ -32,45 +32,48 @@ public class EmployeeResourceFunctionalTesting {
 
 	@Test(expected = HttpException.class)
 	public void testCreateEmployeeEmpty() {
-		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(EmployeeResource.EMPLOYEES)
-				.body("").build();
+		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(EmployeeResource.EMPLOYEES).body("")
+				.build();
 		new HttpClientService().httpRequest(request);
 	}
 
 	@Test(expected = HttpException.class)
 	public void testCreateEmployeeBody() {
-		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(EmployeeResource.EMPLOYEES)
-				.build();
+		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(EmployeeResource.EMPLOYEES).build();
 		new HttpClientService().httpRequest(request);
 	}
-	
+
 	@Test
 	public void testReadEmployee() {
 		this.createEmployee();
 		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(EmployeeResource.EMPLOYEES)
 				.path(EmployeeResource.ID).expandPath("1").build();
-		assertEquals("{\"id\":1,\"surname\":\"Loaiza,\"active\":\"true\"}",new HttpClientService().httpRequest(request).getBody());
+		assertEquals("{\"id\":1,\"surname\":\"Loaiza,\"active\":\"true\"}",
+				new HttpClientService().httpRequest(request).getBody());
 	}
-	
+
 	@Test(expected = HttpException.class)
 	public void testReadDepartmentNull() {
 		this.createEmployee();
 		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(EmployeeResource.EMPLOYEES)
 				.path(EmployeeResource.ID).expandPath("2").build();
-		assertEquals("{\"id\":1,\"surname\":\"Loaiza,\"active\":\"true\"}",new HttpClientService().httpRequest(request).getBody());
+		assertEquals("{\"id\":1,\"surname\":\"Loaiza,\"active\":\"true\"}",
+				new HttpClientService().httpRequest(request).getBody());
 	}
-	
+
 	@Test
 	public void testDeleteEmployee() {
 		this.createEmployee();
-		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.DELETE).path(EmployeeResource.EMPLOYEES).path("/{1}").build();
+		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.DELETE).path(EmployeeResource.EMPLOYEES)
+				.path(EmployeeResource.ID).expandPath("1").build();
 		new HttpClientService().httpRequest(request);
 	}
-	
-	@Test
+
+	@Test(expected = HttpException.class)
 	public void testDeleteEmployeeIdNull() {
 		this.createEmployee();
-		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.DELETE).path(EmployeeResource.EMPLOYEES).path("/{1}").build();
+		HttpRequest request = new HttpRequestBuilder().method(HttpMethod.DELETE).path(EmployeeResource.EMPLOYEES)
+				.path(EmployeeResource.ID).expandPath("").build();
 		new HttpClientService().httpRequest(request);
 	}
 }
