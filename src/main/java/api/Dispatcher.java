@@ -1,7 +1,9 @@
 package api;
 
 import api.resources.DepartmentResource;
+import api.resources.EmployeeResource;
 import api.resources.exceptions.DepartmentFieldInvalidException;
+import api.resources.exceptions.EmployeeFieldInvalidException;
 import api.resources.exceptions.RequestInvalidException;
 import http.HttpRequest;
 import http.HttpResponse;
@@ -10,6 +12,8 @@ import http.HttpStatus;
 public class Dispatcher {
 
 	private DepartmentResource departmentResource = new DepartmentResource();
+	
+	private EmployeeResource employeeResource = new EmployeeResource();
 
 	private void responseError(HttpResponse response, Exception e) {
 		response.setBody("{\"error\":\"" + e + "\"}");
@@ -18,8 +22,8 @@ public class Dispatcher {
 
 	public void doGet(HttpRequest request, HttpResponse response) {
 		try {
-			if(request.isEqualsPath(DepartmentResource.DEPARTMENT + DepartmentResource.ID)) {
-				 response.setBody(departmentResource.readDepartment(Long.valueOf(request.paths()[1])).toString());	
+			if (request.isEqualsPath(DepartmentResource.DEPARTMENT + DepartmentResource.ID)) {
+				response.setBody(departmentResource.readDepartment(Long.valueOf(request.paths()[1])).toString());
 			}
 		} catch (Exception e) {
 			responseError(response, e);
@@ -37,9 +41,19 @@ public class Dispatcher {
 					departmentResource.createDepartment(departmentTitle, departmentCenter);
 					response.setStatus(HttpStatus.CREATED);
 				}
+			} else if (request.isEqualsPath(EmployeeResource.EMPLOYEES)) {
+				if ((request.getBody() == null) || (request.getBody().split(":").length < 2)) {
+					throw new EmployeeFieldInvalidException();
+				} else {
+					String employeeSurname = request.getBody().split(":")[0];
+					boolean employeeActive = request.getBody().split(":")[1] != null;
+					employeeResource.createEmployee(employeeSurname, employeeActive);
+					response.setStatus(HttpStatus.CREATED);
+				}
 			} else {
 				throw new RequestInvalidException(request.getPath());
 			}
+
 		} catch (Exception e) {
 			responseError(response, e);
 		}
