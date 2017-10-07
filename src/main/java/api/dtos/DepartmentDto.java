@@ -10,8 +10,6 @@ public class DepartmentDto {
 
 	private String center;
 
-	public DepartmentDto() {
-	}
 
 	public DepartmentDto(Department department) {
 		id = department.getId();
