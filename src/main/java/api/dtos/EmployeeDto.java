@@ -10,9 +10,6 @@ public class EmployeeDto {
 
 	private Boolean active;
 
-	public EmployeeDto() {
-	}
-
 	public EmployeeDto(Employee employee) {
 		id = employee.getId();
 		setSurname(employee.getSurname());
