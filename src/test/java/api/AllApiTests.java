@@ -8,6 +8,7 @@ import api.controllers.AllApiControllersTests;
 import api.daos.memory.AllApiDaosMemoryTests;
 import api.entities.AllApiEntitiesTests;
 import api.exceptions.ExceptionTest;
+import api.resource.AllResourceTests;
 import http.HttpRequestTest;
 
 @RunWith(Suite.class)
@@ -15,6 +16,7 @@ import http.HttpRequestTest;
     AllApiControllersTests.class,
     AllApiEntitiesTests.class,
     AllApiDaosMemoryTests.class,
+    AllResourceTests.class,
     ExceptionTest.class,
     HttpRequestTest.class
 })
