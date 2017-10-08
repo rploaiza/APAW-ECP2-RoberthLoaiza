@@ -5,7 +5,7 @@
 
 ### Estado del código
 
-[![Build Status](https://travis-ci.org/rploaiza/APAW-ECP2-RoberthLoaiza.svg?branch=develop)](https://travis-ci.org/rploaiza/APAW-ECP2-RoberthLoaiza)
+[![Build Status](https://travis-ci.org/rploaiza/APAW-ECP2-RoberthLoaiza.svg?branch=master)](https://travis-ci.org/rploaiza/APAW-ECP2-RoberthLoaiza)
 
 [![Quality Gate](https://sonarcloud.io/api/badges/gate?key=es.upm.miw:APAW-ECP2-RoberthLoaiza)](https://sonarcloud.io/dashboard/index/es.upm.miw:APAW-ECP2-RoberthLoaiza)
 
