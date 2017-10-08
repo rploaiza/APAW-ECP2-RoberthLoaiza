@@ -33,14 +33,14 @@ public class BuilderDepartmentTest {
 	}
 
 	@Test
-	public void testOrderContainsNull() {
+	public void testDepartmentNull() {
 		Department department = new BuilderDepartment("TICs", "Informatica").build();
 		assertNull(department.getEmployee());
 		assertFalse(department.employeeControl(null));
 	}
 
 	@Test
-	public void testOrderContainsNotNull() {
+	public void testDepartmentNotNull() {
 		Department department = new BuilderDepartment("TICs", "Informatica").employee(new Employee("Loaiza", true))
 				.build();
 		assertNotNull(department.getEmployee());

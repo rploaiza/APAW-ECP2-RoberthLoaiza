@@ -76,4 +76,28 @@ public class EmployeeResourceFunctionalTesting {
 				.path(EmployeeResource.ID).expandPath("").build();
 		new HttpClientService().httpRequest(request);
 	}
+	
+	@Test
+    public void testPatchEmployee() {
+        this.createEmployee();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(EmployeeResource.EMPLOYEES).path(EmployeeResource.ID)
+                .expandPath("1").body("false").build();
+        new HttpClientService().httpRequest(request);
+    }
+    
+	@Test(expected = HttpException.class)
+    public void testPatchEmployeeIdFound() {
+        this.createEmployee();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(EmployeeResource.EMPLOYEES).path(EmployeeResource.ID)
+                .expandPath("2").body("false").build();
+        new HttpClientService().httpRequest(request);
+    }
+	
+	@Test(expected = HttpException.class)
+    public void testPatchEmployeeNull() {
+        this.createEmployee();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(EmployeeResource.EMPLOYEES).path(EmployeeResource.ID)
+                .expandPath("1").build();
+        new HttpClientService().httpRequest(request);
+    }
 }

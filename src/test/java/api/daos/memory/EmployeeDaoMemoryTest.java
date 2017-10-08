@@ -41,7 +41,7 @@ public class EmployeeDaoMemoryTest {
 	}
 	
     @Test
-    public void testReadDepartmentToString() {
+    public void testReadEmployeeToString() {
        assertEquals("{\"id\":1,\"surname\":\"Loaiza,\"active\":\"true\"}",DaoFactory.getFactory().getEmployeeDao().read(1L).toString());
     }
 }
