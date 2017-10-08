@@ -35,7 +35,7 @@ public class EmployeeControllerIT {
 	}
 
 	@Test
-	public void testReadDepartmentToString() {
+	public void testReadEmployeeToString() {
 		assertEquals("{\"id\":1,\"surname\":\"Loaiza,\"active\":\"true\"}",
 				employeeController.readEmployee(1L).get().toString());
 	}

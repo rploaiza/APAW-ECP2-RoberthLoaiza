@@ -32,4 +32,18 @@ public class EmployeeResource {
 	public void deleteEmployee(Long employeeId) {
 		new EmployeeController().deleteEmployee(employeeId);
 	}
+	
+	public EmployeeDto actualizarEmployee(long employeeId, boolean activeEmployee) throws EmployeeFieldInvalidException, EmployeeIdNotFoundException {
+		if (employeeId > 0) {
+			if (Boolean.valueOf(activeEmployee)== null) {
+				throw new EmployeeFieldInvalidException();
+			} else {
+				Optional<EmployeeDto> optional = new EmployeeController().actualizarEmployee(employeeId,activeEmployee);
+				return optional.orElseThrow(() -> new EmployeeIdNotFoundException(Long.toString(employeeId)));
+			}
+		} else {
+			throw new EmployeeIdNotFoundException(Long.toString(employeeId));
+		}
+		
+	}
 }
