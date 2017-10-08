@@ -28,4 +28,21 @@ public class DepartmentResource {
 			throw new DepartmentFieldInvalidException();
 		}
 	}
+
+	public DepartmentDto actualizarDepartment(long departmentId, String departmentTitle, String center)
+			throws DepartmentIdNotFoundException, DepartmentFieldInvalidException {
+		if (departmentId > 0) {
+			if (departmentTitle == null || center == null) {
+				throw new DepartmentFieldInvalidException();
+			} else {
+				Optional<DepartmentDto> optional = new DepartmentController().actualizarDepartment(departmentId,
+						departmentTitle, center);
+				return optional.orElseThrow(() -> new DepartmentIdNotFoundException(Long.toString(departmentId)));
+			}
+		} else {
+			throw new DepartmentIdNotFoundException(Long.toString(departmentId));
+		}
+
+	}
+
 }

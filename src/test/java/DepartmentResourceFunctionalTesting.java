@@ -59,4 +59,28 @@ public class DepartmentResourceFunctionalTesting {
 				.path(DepartmentResource.ID).expandPath("2").build();
 		assertEquals("{\"id\":1,\"title\":\"Database,\"center\":\"Informatica\"}",new HttpClientService().httpRequest(request).getBody());
 	}
+	
+    @Test
+    public void testPatchDepartment() {
+        this.createDepartment();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DepartmentResource.DEPARTMENT).path(DepartmentResource.ID)
+                .expandPath("1").body("TICs:Datos").build();
+        new HttpClientService().httpRequest(request);
+    }
+    
+	@Test(expected = HttpException.class)
+    public void testPatchDepartmentIdFound() {
+        this.createDepartment();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DepartmentResource.DEPARTMENT).path(DepartmentResource.ID)
+                .expandPath("2").body("TICs:Datos").build();
+        new HttpClientService().httpRequest(request);
+    }
+	
+	@Test(expected = HttpException.class)
+    public void testPatchDepartmentNull() {
+        this.createDepartment();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DepartmentResource.DEPARTMENT).path(DepartmentResource.ID)
+                .expandPath("1").build();
+        new HttpClientService().httpRequest(request);
+    }
 }

@@ -39,4 +39,10 @@ public class DepartmentDaoMemoryTest {
 	public void testReadNonExistId() {
 		assertNull(DaoFactory.getFactory().getDepartmentDao().read(2L));
 	}
+	
+	@Test
+	public void testReadDepartmentToString() {
+		assertEquals("{\"id\":1,\"title\":\"TICs,\"center\":\"Informatica\"}", DaoFactory.getFactory().getDepartmentDao().read(1L).toString());
+		
+	}
 }

@@ -39,4 +39,9 @@ public class EmployeeDaoMemoryTest {
 	public void testReadNonExistId() {
 		assertNull(DaoFactory.getFactory().getEmployeeDao().read(2L));
 	}
+	
+    @Test
+    public void testReadDepartmentToString() {
+       assertEquals("{\"id\":1,\"surname\":\"Loaiza,\"active\":\"true\"}",DaoFactory.getFactory().getEmployeeDao().read(1L).toString());
+    }
 }
