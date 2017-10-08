@@ -27,4 +27,15 @@ public class EmployeeController {
 	public void deleteEmployee(long employeeId) {
 		DaoFactory.getFactory().getEmployeeDao().deleteById(employeeId);
 	}
+	
+	public Optional<EmployeeDto> actualizarEmployee(long employeeId, boolean activeEmployee) {
+        if (existEmployeeId(employeeId)) {
+        	Employee employee = DaoFactory.getFactory().getEmployeeDao().read(employeeId);
+        	employee.setActive(activeEmployee);
+            DaoFactory.getFactory().getEmployeeDao().update(employee);
+            return Optional.of(new EmployeeDto(DaoFactory.getFactory().getEmployeeDao().read(employeeId)));
+        } else {
+            return Optional.empty();
+        }
+    }
 }
