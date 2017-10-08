@@ -33,4 +33,9 @@ public class DepartmentControllerIT {
 	public void testReadDepartmentNonExistId() {
 		assertFalse(departmentController.readDepartment(2L).isPresent());
 	}
+	
+    @Test
+    public void testReadDepartmentToString() {
+       assertEquals("{\"id\":1,\"title\":\"TICs,\"center\":\"Informatica\"}",departmentController.readDepartment(1L).get().toString());
+    }
 }

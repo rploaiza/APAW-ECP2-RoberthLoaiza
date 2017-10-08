@@ -49,5 +49,10 @@ public class Employee {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	
+	@Override
+	public String toString() {
+		return "{\"id\":" + id + ",\"surname\":\"" + surname + ",\"active\":\"" + active + "\"}";
+	}
 
 }

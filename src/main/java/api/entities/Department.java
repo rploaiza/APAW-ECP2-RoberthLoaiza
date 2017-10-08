@@ -66,4 +66,9 @@ public class Department {
 			return employees.contains(employee);
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return "{\"id\":" + id + ",\"title\":\"" + title + ",\"center\":\"" + center + "\"}";
+	}
 }
