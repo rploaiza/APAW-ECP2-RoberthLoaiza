@@ -66,7 +66,20 @@ public class Dispatcher {
 	}
 
 	public void doPatch(HttpRequest request, HttpResponse response) {
-		responseError(response, new RequestInvalidException(request.getPath()));
+		 try {
+	            if (request.isEqualsPath(DepartmentResource.DEPARTMENT + DepartmentResource.ID)) {
+	                if (request.getBody() == null || (request.getBody().split(":").length < 2)) {
+	                    throw new DepartmentFieldInvalidException();
+	                } else {
+	                	departmentResource.actualizarDepartment(Long.valueOf(request.paths()[1]) , request.getBody().split(":")[0], request.getBody().split(":")[1]);
+	                    response.setBody(departmentResource.readDepartment(Long.valueOf(request.paths()[1])).toString());
+	                }
+	            } else {
+	                throw new RequestInvalidException(request.getPath());
+	            }
+	        } catch (Exception e) {
+	            responseError(response, e);
+	        }
 	}
 
 	public void doDelete(HttpRequest request, HttpResponse response) {
