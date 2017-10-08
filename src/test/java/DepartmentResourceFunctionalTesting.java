@@ -69,10 +69,18 @@ public class DepartmentResourceFunctionalTesting {
     }
     
 	@Test(expected = HttpException.class)
-    public void testPatchDepartmentNull() {
+    public void testPatchDepartmentIdFound() {
         this.createDepartment();
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DepartmentResource.DEPARTMENT).path(DepartmentResource.ID)
                 .expandPath("2").body("TICs:Datos").build();
+        new HttpClientService().httpRequest(request);
+    }
+	
+	@Test(expected = HttpException.class)
+    public void testPatchDepartmentNull() {
+        this.createDepartment();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DepartmentResource.DEPARTMENT).path(DepartmentResource.ID)
+                .expandPath("1").build();
         new HttpClientService().httpRequest(request);
     }
 }
